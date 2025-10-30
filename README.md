@@ -1,43 +1,68 @@
-# [cite_start]Delivery Tech API [cite: 153]
+# Delivery Tech API
 
-[cite_start]Sistema de delivery desenvolvido com Spring Boot e Java 21. [cite: 154]
+ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 
-## [cite_start]🚀 Tecnologias [cite: 155]
+## 🚀 Tecnologias
 
-- [cite_start]**Java 21 LTS** (versão mais recente) [cite: 156]
-- [cite_start]Spring Boot 3.5.7 [cite: 157]
-- [cite_start]Spring Web [cite: 158]
-- [cite_start]Spring Data JPA [cite: 159]
-- [cite_start]H2 Database [cite: 160]
-- [cite_start]Maven [cite: 161]
+- **Java 21 LTS** (versão mais recente)
+- Spring Boot 3.5.7
+- Spring Web
+- Spring Data JPA
+- H2 Database (Banco em memória)
+- Maven
 
-## [cite_start]⚡ Recursos Modernos Utilizados [cite: 162]
+## ⚡ Recursos Modernos Utilizados
 
-- [cite_start]**Records** (Java 14+) para DTOs concisos (ver `HealthController.java`) [cite: 163]
+- **Records** (Java 14+) para DTOs concisos (ver `HealthController.java`)
 - `Map.of()` para criação de mapas imutáveis.
+- Padrão de Camadas (Controller, Service, Repository).
 
-## [cite_start]🏃‍♂️ Como executar [cite: 167]
+## 🏃‍♂️ Como executar
 
-1. [cite_start]**Pré-requisitos:** JDK 21 instalado [cite: 168]
-2. [cite_start]Clone o repositório [cite: 169]
-3. [cite_start]Execute: `./mvnw spring-boot:run` 
-4. [cite_start]Acesse: `http://localhost:8080/health` [cite: 171]
+1. **Pré-requisitos:** JDK 21 instalado
+2. Clone o repositório
+3. Execute: `./mvnw spring-boot:run`
+4. A aplicação estará disponível em `http://localhost:8080`
 
-## [cite_start]📋 Endpoints [cite: 172]
+## 📋 Endpoints da API
 
-- [cite_start]`GET /health` - Status da aplicação (inclui versão Java) [cite: 173]
-- [cite_start]`GET /info` - Informações da aplicação [cite: 174]
-- [cite_start]`GET /h2-console` - Console do banco H2 [cite: 175]
+### Health & Info
+* `GET /health` - Status da aplicação (inclui versão Java)
+* `GET /info` - Informações da aplicação
+* `GET /h2-console` - Console do banco H2 (JDBC URL: `jdbc:h2:mem:deliverydb`)
 
-## [cite_start]🔧 Configuração [cite: 176]
+### Clientes (`/clientes`)
+* `POST /clientes` - Cadastra um novo cliente.
+* `GET /clientes` - Lista todos os clientes ativos.
+* `GET /clientes/{id}` - Busca um cliente por ID.
+* `PUT /clientes/{id}` - Atualiza os dados de um cliente.
+* `DELETE /clientes/{id}` - Inativa um cliente (Soft Delete).
 
-- [cite_start]Porta: 8080 [cite: 177]
-- [cite_start]Banco: H2 em memória [cite: 178]
-- [cite_start]Profile: development [cite: 179]
+### Restaurantes (`/restaurantes`)
+* `POST /restaurantes` - Cadastra um novo restaurante.
+* `GET /restaurantes` - Lista todos os restaurantes ativos.
+* `GET /restaurantes/{id}` - Busca um restaurante por ID.
+* `GET /restaurantes/categoria?nome={nome}` - Busca restaurantes ativos por nome de categoria.
+* `PUT /restaurantes/{id}` - Atualiza os dados de um restaurante.
+* `DELETE /restaurantes/{id}` - Inativa um restaurante (Soft Delete).
 
-## [cite_start]👨‍💻 Desenvolvedor [cite: 180]
+### Produtos (`/produtos`)
+* `POST /produtos/restaurante/{id}` - Cadastra um novo produto para um restaurante.
+* `GET /produtos/restaurante/{id}` - Lista todos os produtos de um restaurante.
+* `GET /produtos/restaurante/{id}/disponiveis` - Lista apenas produtos disponíveis de um restaurante.
+* `GET /produtos/{id}` - Busca um produto por ID.
+* `PUT /produtos/{id}` - Atualiza os dados de um produto.
+* `PATCH /produtos/{id}/disponibilidade?disponivel={true|false}` - Atualiza a disponibilidade de um produto.
 
-- [cite_start][Richard Lopes] - [IBMR] 
+### Pedidos (`/pedidos`)
+* `POST /pedidos?clienteId={id}&restauranteId={id}` - Cria um novo pedido para um cliente e restaurante.
+* `GET /pedidos/{id}` - Busca um pedido por ID.
+* `GET /pedidos/cliente/{id}` - Lista todos os pedidos de um cliente.
+* `PATCH /pedidos/{id}/status?status={novoStatus}` - Atualiza o status de um pedido (ex: CONFIRMADO, ENTREGUE).
+
+## 👨‍💻 Desenvolvedor
+
+- [Richard Lopes] - [IBMR]
 
 ---
-[cite_start]Desenvolvido com JDK 21 e Spring Boot 3.5.7 [cite: 182]
+ Desenvolvido com JDK 21 e Spring Boot 3.5.7
