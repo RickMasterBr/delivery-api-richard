@@ -1,5 +1,9 @@
 package com.deliverytech.delivery.controller;
 
+
+import com.deliverytech.delivery.dto.RestauranteDTO;
+import jakarta.validation.Valid;
+
 import com.deliverytech.delivery.entity.Restaurante;
 import com.deliverytech.delivery.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,33 +20,27 @@ public class RestauranteController {
     @Autowired
     private RestauranteService restauranteService;
 
-    /**
-     * CRIAR restaurante
-     * Mapeia para: POST /restaurantes
-     */
+
     @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody Restaurante restaurante) {
-        try {
-            Restaurante salvo = restauranteService.cadastrar(restaurante);
-            return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Restaurante> cadastrar(@Valid @RequestBody RestauranteDTO restauranteDTO) {
+        
+        Restaurante salvo = restauranteService.cadastrar(restauranteDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
 
-    /**
-     * LISTAR todos os restaurantes ativos
-     * Mapeia para: GET /restaurantes
-     */
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Restaurante> atualizar(@PathVariable Long id, @Valid @RequestBody RestauranteDTO restauranteDTO) {
+        Restaurante atualizado = restauranteService.atualizar(id, restauranteDTO);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    
     @GetMapping
     public ResponseEntity<List<Restaurante>> listarAtivos() {
         return ResponseEntity.ok(restauranteService.listarAtivos());
     }
 
-    /**
-     * BUSCAR por ID
-     * Mapeia para: GET /restaurantes/{id}
-     */
     @GetMapping("/{id}")
     public ResponseEntity<Restaurante> buscarPorId(@PathVariable Long id) {
         return restauranteService.buscarPorId(id)
@@ -50,39 +48,12 @@ public class RestauranteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    /**
-     * ATUALIZAR restaurante
-     * Mapeia para: PUT /restaurantes/{id}
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody Restaurante restaurante) {
-        try {
-            Restaurante atualizado = restauranteService.atualizar(id, restaurante);
-            return ResponseEntity.ok(atualizado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    /**
-     * INATIVAR restaurante
-     * Mapeia para: DELETE /restaurantes/{id}
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> inativar(@PathVariable Long id) {
-        try {
-            restauranteService.inativar(id);
-            return ResponseEntity.ok().body("Restaurante inativado com sucesso.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        restauranteService.inativar(id);
+        return ResponseEntity.ok().body("Restaurante inativado com sucesso.");
     }
 
-    /**
-     * BUSCAR por Categoria
-     * Mapeia para: GET /restaurantes/categoria?nome=Italiana
-     * @RequestParam: Pega o valor do parâmetro "nome" da URL.
-     */
     @GetMapping("/categoria")
     public ResponseEntity<List<Restaurante>> buscarPorCategoria(@RequestParam("nome") String categoria) {
         return ResponseEntity.ok(restauranteService.buscarPorCategoria(categoria));
