@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode; 
+import lombok.ToString; 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,21 +37,25 @@ public class Pedido {
 
     private String observacoes;
 
-    // Um pedido pertence a UM cliente
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude 
+    @JsonIgnore
     private Cliente cliente;
 
-    // Um pedido é feito em UM restaurante
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurante_id", nullable = false)
+    @ToString.Exclude 
+    @EqualsAndHashCode.Exclude 
+    @JsonIgnore
     private Restaurante restaurante;
-
-    // O campo 'itens' no schema.sql é um VARCHAR.
-    // Estamos seguindo o schema.
+    
     private String itens;
 
-    @PrePersist // Define a data do pedido automaticamente antes de salvar
+    @PrePersist 
     public void prePersist() {
         if (dataPedido == null) {
             dataPedido = LocalDateTime.now();

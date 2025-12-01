@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode; 
+import lombok.ToString; 
 
 import java.math.BigDecimal;
 
@@ -26,11 +28,10 @@ public class Produto {
     private String categoria;
     private Boolean disponivel;
 
-    /**
-     * @ManyToOne: Muitos produtos podem pertencer a UM restaurante.
-     * @JoinColumn: Especifica a coluna (FK) no banco de dados.
-     */
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurante_id", nullable = false)
+    @ToString.Exclude 
+    @EqualsAndHashCode.Exclude 
     private Restaurante restaurante;
 }

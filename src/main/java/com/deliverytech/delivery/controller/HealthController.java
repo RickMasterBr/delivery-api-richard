@@ -1,5 +1,7 @@
+
 package com.deliverytech.delivery.controller;
 
+import com.deliverytech.delivery.dto.AppInfo; 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,15 +32,9 @@ public class HealthController {
             "1.0.0",
             "richard", 
             "JDK 21",
-            "Spring Boot 3.5.7"
+            "Spring Boot 3.5.7" 
         );
     }
 
-    public record AppInfo(
-        String application,
-        String version,
-        String developer,
-        String javaVersion,
-        String framework
-    ) {}
+
 }
