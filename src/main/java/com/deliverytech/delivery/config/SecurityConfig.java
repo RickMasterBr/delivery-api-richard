@@ -1,4 +1,4 @@
-package com.deliverytech.delivery.config; //
+package com.deliverytech.delivery.config;  
 
 import com.deliverytech.delivery.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -29,12 +29,12 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // Endpoints públicos (Auth, Swagger, H2 Console)
+                 
                 .requestMatchers("/auth/**", "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                // Todo o resto exige autenticação
+                 
                 .anyRequest().authenticated()
             )
-            // Necessário para permitir o H2 Console
+             
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider())

@@ -9,19 +9,12 @@ import java.util.List;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-    /**
-     * Busca todos os produtos de um restaurante específico.
-     * O Spring JPA entende "RestauranteId" e busca pelo ID da entidade aninhada.
-     */
-    List<Produto> findByRestauranteId(Long restauranteId); // [cite: 240]
+     
+    List<Produto> findByRestauranteId(Long restauranteId);  
 
-    /**
-     * Busca produtos de um restaurante que também estejam disponíveis.
-     */
-    List<Produto> findByRestauranteIdAndDisponivelTrue(Long restauranteId); // [cite: 240]
+     
+    List<Produto> findByRestauranteIdAndDisponivelTrue(Long restauranteId);  
 
-    /**
-     * Busca produtos de um restaurante, por categoria.
-     */
-    List<Produto> findByRestauranteIdAndCategoriaIgnoreCase(Long restauranteId, String categoria); // [cite: 240]
+     
+    List<Produto> findByRestauranteIdAndCategoriaIgnoreCase(Long restauranteId, String categoria);  
 }

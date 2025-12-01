@@ -1,8 +1,8 @@
-// /src/main/java/com/deliverytech/delivery/service/ClienteService.java
+ 
 
 package com.deliverytech.delivery.service;
 
-import com.deliverytech.delivery.dto.ClienteDTO; // Importar DTO
+import com.deliverytech.delivery.dto.ClienteDTO;  
 import com.deliverytech.delivery.entity.Cliente;
 import com.deliverytech.delivery.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Cliente cadastrar(ClienteDTO clienteDTO) { // <--- MUDANÇA AQUI
+    public Cliente cadastrar(ClienteDTO clienteDTO) {  
         
-        if (clienteRepository.existsByEmail(clienteDTO.email())) { // <--- MUDANÇA AQUI
+        if (clienteRepository.existsByEmail(clienteDTO.email())) {  
             throw new IllegalArgumentException("E-mail já cadastrado: " + clienteDTO.email());
         }
 
@@ -35,7 +35,7 @@ public class ClienteService {
     }
 
   
-    public Cliente atualizar(Long id, ClienteDTO clienteAtualizado) { // <--- MUDANÇA AQUI
+    public Cliente atualizar(Long id, ClienteDTO clienteAtualizado) {  
         Cliente clienteExistente = buscarPorId(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado com ID: " + id));
 

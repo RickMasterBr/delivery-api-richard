@@ -1,4 +1,4 @@
-package com.deliverytech.delivery.security; //
+package com.deliverytech.delivery.security;  
 
 import com.deliverytech.delivery.entity.Usuario;
 import io.jsonwebtoken.Claims;
@@ -44,7 +44,7 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        long expiration = 1000 * 60 * 60 * 24; // 24 horas
+        long expiration = 1000 * 60 * 60 * 24;  
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)

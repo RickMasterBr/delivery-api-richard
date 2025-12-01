@@ -41,11 +41,11 @@ public class Usuario implements UserDetails {
 
     private boolean ativo;
     private LocalDateTime dataCriacao;
-    private Long restauranteId; // Opcional, para vincular a um restaurante
+    private Long restauranteId;  
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Converte o Enum Role para uma autoridade do Spring
+         
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 

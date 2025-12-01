@@ -21,7 +21,7 @@ public record ProdutoDTO(
 
     @NotNull(message = "Preço é obrigatório.")
     @DecimalMin(value = "0.01", message = "Preço deve ser maior que zero.")
-    @DecimalMax(value = "500.00", message = "Preço não pode exceder R$ 500,00.") // [cite: 312]
+    @DecimalMax(value = "500.00", message = "Preço não pode exceder R$ 500,00.")  
     BigDecimal preco,
 
     @NotBlank(message = "Categoria é obrigatória.")

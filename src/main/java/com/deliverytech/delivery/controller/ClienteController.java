@@ -1,8 +1,8 @@
-// /src/main/java/com/deliverytech/delivery/controller/ClienteController.java
+ 
 
 package com.deliverytech.delivery.controller;
 
-// Importações novas
+ 
 import com.deliverytech.delivery.dto.ClienteDTO;
 import jakarta.validation.Valid;
 
@@ -24,9 +24,9 @@ public class ClienteController {
 
     
     @PostMapping
-    public ResponseEntity<?> cadastrar(@Valid @RequestBody ClienteDTO clienteDTO) { // <--- MUDANÇA AQUI
+    public ResponseEntity<?> cadastrar(@Valid @RequestBody ClienteDTO clienteDTO) {  
         try {
-            Cliente clienteSalvo = clienteService.cadastrar(clienteDTO); // <--- MUDANÇA AQUI
+            Cliente clienteSalvo = clienteService.cadastrar(clienteDTO);  
             
             return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
         } catch (IllegalArgumentException e) {
@@ -36,9 +36,9 @@ public class ClienteController {
 
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody ClienteDTO clienteDTO) { // <--- MUDANÇA AQUI
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody ClienteDTO clienteDTO) {  
         try {
-            Cliente cliente = clienteService.atualizar(id, clienteDTO); // <--- MUDANÇA AQUI
+            Cliente cliente = clienteService.atualizar(id, clienteDTO);  
             return ResponseEntity.ok(cliente); 
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

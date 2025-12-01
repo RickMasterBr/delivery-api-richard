@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Data // Anotação do Lombok: cria getters, setters, toString, etc.
-@NoArgsConstructor // Anotação do Lombok: cria construtor vazio
-@AllArgsConstructor // Anotação do Lombok: cria construtor com todos os campos
+@Data  
+@NoArgsConstructor  
+@AllArgsConstructor  
 @Table(name = "clientes")
 public class Cliente {
 
@@ -28,12 +28,12 @@ public class Cliente {
 
     private Boolean ativo;
 
-    // Método para inativação (soft delete)
+     
     public void inativar() {
         this.ativo = false;
     }
 
-    @PrePersist // Antes de salvar um novo cliente, define a data de cadastro
+    @PrePersist  
     public void prePersist() {
         dataCadastro = LocalDateTime.now();
         if (ativo == null) {

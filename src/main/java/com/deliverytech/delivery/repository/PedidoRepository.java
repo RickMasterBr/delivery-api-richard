@@ -10,23 +10,15 @@ import java.util.List;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    /**
-     * Busca todos os pedidos de um cliente específico.
-     */
-    List<Pedido> findByClienteId(Long clienteId); // [cite: 242]
+     
+    List<Pedido> findByClienteId(Long clienteId);  
 
-    /**
-     * Busca todos os pedidos de um restaurante específico.
-     */
+     
     List<Pedido> findByRestauranteId(Long restauranteId);
 
-    /**
-     * Busca pedidos de um cliente por um status específico (ex: "PENDENTE").
-     */
-    List<Pedido> findByClienteIdAndStatusIgnoreCase(Long clienteId, String status); // [cite: 242]
+     
+    List<Pedido> findByClienteIdAndStatusIgnoreCase(Long clienteId, String status);  
 
-    /**
-     * Busca pedidos entre duas datas.
-     */
-    List<Pedido> findByDataPedidoBetween(LocalDateTime dataInicio, LocalDateTime dataFim); // [cite: 242]
+     
+    List<Pedido> findByDataPedidoBetween(LocalDateTime dataInicio, LocalDateTime dataFim);  
 }

@@ -41,7 +41,7 @@ class PedidoServiceTest {
     @Test
     @DisplayName("Deve criar pedido com sucesso quando dados são válidos")
     void deveCriarPedidoComSucesso() {
-        // Cenário (Arrange)
+         
         Long clienteId = 1L;
         Long restauranteId = 2L;
         
@@ -66,10 +66,10 @@ class PedidoServiceTest {
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(pedidoRepository.save(any(Pedido.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Ação (Act)
+         
         Pedido pedidoSalvo = pedidoService.criar(dto);
 
-        // Verificação (Assert)
+         
         assertNotNull(pedidoSalvo);
         assertEquals("PENDENTE", pedidoSalvo.getStatus());
         assertEquals(cliente, pedidoSalvo.getCliente());
@@ -82,7 +82,7 @@ class PedidoServiceTest {
         Long clienteId = 1L;
         Cliente clienteInativo = new Cliente();
         clienteInativo.setId(clienteId);
-        clienteInativo.setAtivo(false); // Inativo
+        clienteInativo.setAtivo(false);  
 
         PedidoCreateDTO dto = new PedidoCreateDTO(
             clienteId, 1L, BigDecimal.TEN, null, List.of(), null
@@ -90,7 +90,7 @@ class PedidoServiceTest {
 
         when(clienteRepository.findById(clienteId)).thenReturn(Optional.of(clienteInativo));
 
-        // Act & Assert
+         
         assertThrows(IllegalArgumentException.class, () -> pedidoService.criar(dto));
         verify(pedidoRepository, never()).save(any());
     }
