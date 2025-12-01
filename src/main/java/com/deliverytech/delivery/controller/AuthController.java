@@ -1,8 +1,8 @@
 package com.deliverytech.delivery.controller; //
 
-import com.deliverytech.delivery.dto.auth.AuthRequest;
-import com.deliverytech.delivery.dto.auth.AuthResponse;
-import com.deliverytech.delivery.dto.auth.RegisterRequest;
+import com.deliverytech.delivery.dto.AuthRequest;
+import com.deliverytech.delivery.dto.AuthResponse;
+import com.deliverytech.delivery.dto.RegisterRequest;
 import com.deliverytech.delivery.entity.Usuario;
 import com.deliverytech.delivery.repository.UsuarioRepository;
 import com.deliverytech.delivery.security.JwtUtil;
